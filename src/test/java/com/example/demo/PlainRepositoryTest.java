@@ -2,12 +2,8 @@ package com.example.demo;
 
 import com.example.demo.persistance.Plain;
 import com.example.demo.repository.PlainRepository;
-import com.example.demo.repository.impl.PlainRepositoryImpl;
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -18,19 +14,8 @@ import static org.testng.Assert.assertTrue;
 @SpringBootTest
 public class PlainRepositoryTest extends TestConfig {
 
+    @Autowired
     private PlainRepository plainTestRepository;
-
-    @BeforeClass
-    public void startContainer() {
-        POSTGRES_SQL_CONTAINER.start();
-
-        HikariConfig hikariConfig = new HikariConfig();
-        hikariConfig.setJdbcUrl(POSTGRES_SQL_CONTAINER.getJdbcUrl());
-        hikariConfig.setUsername(POSTGRES_SQL_CONTAINER.getUsername());
-        hikariConfig.setPassword(POSTGRES_SQL_CONTAINER.getPassword());
-        HikariDataSource dataSource = new HikariDataSource(hikariConfig);
-        plainTestRepository = new PlainRepositoryImpl(new JdbcTemplate(dataSource));
-    }
 
     @Test
     public void testGetAllPlains() {
