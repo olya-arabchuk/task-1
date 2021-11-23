@@ -18,7 +18,6 @@ public final class PlainRepositoryImpl implements PlainRepository {
 
     private final JdbcTemplate jdbcTemplate;
 
-    @Autowired
     public PlainRepositoryImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }

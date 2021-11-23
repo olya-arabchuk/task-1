@@ -12,7 +12,6 @@ public class PlainService {
 
     private PlainRepository plainRepository;
 
-    @Autowired
     public PlainService(PlainRepository plainRepository) {
         this.plainRepository = plainRepository;
     }
